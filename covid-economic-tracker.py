@@ -28,11 +28,11 @@ except KeyError:
     print("Hey, didn't find that location. Try again please.")
     exit()
 
-# Getting the most recent value
+# Getting the state's most recent UR
 
 last_value = float(parsed_response["observations"][total_observations-1]["value"]) # assumes oldest data point comes first, as is FRED standard
 
-# Getting the all-time high/all-time low
+# Getting the state's all-time high/all-time low UR
 
 all_values = []
 index = -1
@@ -53,20 +53,15 @@ matching_observations = [v for v in parsed_response["observations"] if v["date"]
 matching_observation = matching_observations[0]
 pre_covid_level = matching_observation["value"]
 
-# pre_covid_level = 
-
-# for v in parsed_response["observations"][index]["date"]:
-#     index = index + 1
-#     if v == "2020-02-01":
-#         pre_covid_level = parsed_response["observations"][index]["value"]
-#     else:
-#         pass
-
 # Getting the current national UR
 
 # Information Output
 
+print("--------------------------------------------")
+print("The " + str.upper(state) + " Labor Market During COVID-19 Pandemic")
+print("--------------------------------------------")
 print("Current UR: " + str(last_value))
 print("February 2020 UR " + str(pre_covid_level))
 print("All Time High UR: " + str(all_time_high))
 print("All Time Low UR: " + str(all_time_low))
+print("--------------------------------------------")
