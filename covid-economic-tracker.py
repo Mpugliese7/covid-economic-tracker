@@ -34,7 +34,7 @@ parsed_response = json.loads(response.text)
 
 total_observations = parsed_response["count"]
 
-last_value = parsed_response["observations"][total_observations-1]["value"] # assumes oldest data point comes first, as is FRED standard
+last_value = float(parsed_response["observations"][total_observations-1]["value"]) # assumes oldest data point comes first, as is FRED standard
 
 print(last_value)
 
@@ -45,7 +45,7 @@ index = -1
 
 for v in parsed_response["observations"]:
     index = index + 1
-    value = parsed_response["observations"][index]["value"]
+    value = float(parsed_response["observations"][index]["value"])
     all_values.append(value)
 
 all_time_high = max(all_values)
