@@ -62,7 +62,9 @@ parsed_response_us = json.loads(response_us.text)
 total_observations_us = parsed_response_us["count"]
 last_value_us = float(parsed_response_us["observations"][total_observations_us-1]["value"])
 
-### Calculate and print difference between state and national URs ###
+# Calculate and the difference between the state and national URs
+
+UR_difference = round(last_value - last_value_us, 1)
 
 ### Flag for weak labor market, if necessary
 
@@ -76,6 +78,7 @@ print("February 2020 Unemployment Rate " + str(pre_covid_level) + "%")
 print("All-Time High Unemployment Rate: " + str(all_time_high) + "%")
 print("All-Time Low Unemployment Rate: " + str(all_time_low) + "%")
 print("Current Unemployment Rate for the United States: " + str(last_value_us) + "%")
+print("Difference between " + str.upper(state) + " and the US: " + str(UR_difference) + "ppts")
 print("----------------------------------------------------------------------")
 if last_value > last_value_us:
     print("THIS STATE'S LABOR MARKET IS AT HIGHER RISK OF NEEDING ECONOMIC POLICY ASSISTANCE")
