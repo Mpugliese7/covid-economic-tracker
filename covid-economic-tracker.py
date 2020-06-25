@@ -8,8 +8,6 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-### define a function that converts format to one decimal and a percent sign ###
-
 api_key = os.environ.get("FRED_API_KEY")
 
 # User Input and API Pull
@@ -65,8 +63,6 @@ last_value_us = float(parsed_response_us["observations"][total_observations_us-1
 # Calculate and the difference between the state and national URs
 
 UR_difference = round(last_value - last_value_us, 1)
-
-### Flag for weak labor market, if necessary
 
 # Information Output
 
