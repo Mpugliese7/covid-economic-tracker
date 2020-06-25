@@ -51,9 +51,16 @@ pre_covid_date = "2020-02-01"
 
 matching_observations = [v for v in parsed_response["observations"] if v["date"] == pre_covid_date] 
 matching_observation = matching_observations[0]
-pre_covid_level = matching_observation["value"]
+pre_covid_level = float(matching_observation["value"])
 
 # Getting the current national UR
+
+request_url_us = f"https://api.stlouisfed.org/fred/series/observations?series_id=UNRATE&api_key={api_key}&file_type=json"
+response_us = requests.get(request_url_us)
+parsed_response_us = json.loads(response_us.text)
+
+total_observations_us = parsed_response_us["count"]
+last_value_us = float(parsed_response_us["observations"][total_observations_us-1]["value"])
 
 # Information Output
 
@@ -64,4 +71,5 @@ print("Current UR: " + str(last_value))
 print("February 2020 UR " + str(pre_covid_level))
 print("All Time High UR: " + str(all_time_high))
 print("All Time Low UR: " + str(all_time_low))
+print("Current UR for the United States: " + str(last_value_us))
 print("--------------------------------------------")
