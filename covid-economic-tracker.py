@@ -12,19 +12,21 @@ api_key = os.environ.get("FRED_API_KEY")
 
 # User Input and API Pull
 
-try:
-    state = input("Please input a state abbreviation: ")
-    FRED_series_id = (state) + "UR"
-    request_url = f"https://api.stlouisfed.org/fred/series/observations?series_id={FRED_series_id}&api_key={api_key}&file_type=json"
-    response = requests.get(request_url)
+while True: 
+    try:
+        state = input("Please input a state abbreviation: ")
+        FRED_series_id = (state) + "UR"
+        request_url = f"https://api.stlouisfed.org/fred/series/observations?series_id={FRED_series_id}&api_key={api_key}&file_type=json"
+        response = requests.get(request_url)
 
-    parsed_response = json.loads(response.text)
+        parsed_response = json.loads(response.text)
 
-    total_observations = parsed_response["count"]
+        total_observations = parsed_response["count"]
+        break
 
-except KeyError:
-    print("Hey, didn't find that location. Try again please.")
-    exit()
+    except KeyError:
+        print("Hey, didn't find that state. Please try again with a state abbreviation.")
+        
 
 # Getting the state's most recent UR
 
