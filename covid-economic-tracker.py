@@ -4,6 +4,9 @@ import csv
 import requests
 import json
 import os
+import pandas as pd
+import plotly
+import plotly.graph_objects as go
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -83,3 +86,36 @@ if last_value > last_value_us:
 else:
     print("THIS STATE'S LABOR MARKET IS AT LOWER RISK OF NEEDING ECONOMIC POLICY ASSISTANCE")
 print("----------------------------------------------------------------------")
+
+# Data Visualization 1 REFERENCE: https://plotly.com/python/time-series/
+
+import plotly.express as px
+
+all_val = []
+a = -1
+for w in parsed_response["observations"]:
+    a = a + 1
+    valuec = float(parsed_response["observations"][a]["value"])
+    all_val.append(valuec)
+values = all_val
+all_date = []
+c = -1
+for y in parsed_response["observations"]:
+    c += 1
+    val_date = parsed_response["observations"][c]["date"]
+    all_date.append(val_date)
+dates = all_date 
+
+
+fig = px.line(x=dates, y=values, title='Unemployment Rate Time Series')
+
+fig.update_xaxes(
+    rangeslider_visible=True,
+    rangeselector=dict(
+        buttons=list([
+            dict(count=1, label="1m", step="month", stepmode="backward"),
+            dict(count=6, label="6m", step="month", stepmode="backward"),
+            dict(count=1, label="YTD", step="year", stepmode="todate"),
+            dict(count=1, label="1y", step="year", stepmode="backward"),
+            dict(step="all")])))
+plotly.offline.plot(fig)
