@@ -100,23 +100,24 @@ print("----------------------------------------------------------------------")
 import plotly.express as px
 
 all_val = []
-a = -1
-for w in parsed_response["observations"]:
-    a = a + 1
-    valuec = float(parsed_response["observations"][a]["value"])
-    all_val.append(valuec)
-values = all_val
+k = -1
+for t in parsed_response["observations"]:
+    k += 1
+    valuec = float(parsed_response["observations"][k]["value"])
+    all_val.append(valuec) 
+values = all_val 
+
+
 all_date = []
-c = -1
-for y in parsed_response["observations"]:
-    c += 1
-    val_date = parsed_response["observations"][c]["date"]
+m = -1
+for r in parsed_response["observations"]:
+    m += 1
+    val_date = parsed_response["observations"][m]["date"]
     all_date.append(val_date)
 dates = all_date 
 
 
-fig = px.line(x=dates, y=values, title='Unemployment Rate Time Series')
-
+fig = px.line(x=dates, y=values, title='State Unemployment Rate Time Series')
 fig.update_xaxes(
     rangeslider_visible=True,
     rangeselector=dict(
@@ -126,4 +127,55 @@ fig.update_xaxes(
             dict(count=1, label="YTD", step="year", stepmode="todate"),
             dict(count=1, label="1y", step="year", stepmode="backward"),
             dict(step="all")])))
+fig.update_yaxes(ticksuffix="%") # reference : https://plotly.com/python/axes/
+fig.update_layout(xaxis_title='Date',yaxis_title='Value %')
+
 plotly.offline.plot(fig)
+
+
+# Data Visualization 2 REFERENCE: https://plotly.com/python/line-charts/
+
+all_val2 = []
+a = -1
+for w in parsed_response["observations"]:
+    a += 1
+    valuec2 = float(parsed_response["observations"][a]["value"])
+    all_val2.append(valuec2)
+values2 = all_val2
+
+all_val_us2 = []
+b = -1
+for x in parsed_response["observations"]:
+    b += 1
+    valuec_us2 = float(parsed_response_us["observations"][b]["value"])
+    all_val_us2.append(valuec_us2)
+values_us2 = all_val_us2
+
+
+all_date2 = []
+c = -1
+for y in parsed_response["observations"]:
+    c += 1
+    val_date2 = parsed_response["observations"][c]["date"]
+    all_date2.append(val_date2)
+dates2 = all_date2   
+
+all_us_date2 = []
+d = -1
+for z in parsed_response_us["observations"]:
+    d += 1
+    us_date2 = parsed_response_us["observations"][d]["date"]
+    all_us_date2.append(us_date2)
+us_dates2 = all_us_date2  
+
+fig2 = go.Figure()
+
+# Create and style traces
+
+fig2.add_trace(go.Scatter(x=all_date2, y=values2, name='state', line = dict(color='firebrick', width=4)))
+fig2.add_trace(go.Scatter(x=all_us_date2, y=values_us2, name='national', line = dict(color='royalblue', width=4, dash='dash')))
+
+# Edit the layout
+fig2.update_yaxes(ticksuffix="%")
+fig2.update_layout(title='Unemployment Rates for Selected State & National', xaxis_title='Date', yaxis_title='Value %')
+plotly.offline.plot(fig2)
