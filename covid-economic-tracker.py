@@ -7,6 +7,7 @@ import os
 import pandas as pd
 import plotly
 import plotly.graph_objects as go
+import plotly.express as px
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -97,8 +98,6 @@ print("----------------------------------------------------------------------")
 
 # Data Visualization 1 REFERENCE: https://plotly.com/python/time-series/
 
-import plotly.express as px
-
 all_val = []
 k = -1
 for t in parsed_response["observations"]:
@@ -127,11 +126,10 @@ fig.update_xaxes(
             dict(count=1, label="YTD", step="year", stepmode="todate"),
             dict(count=1, label="1y", step="year", stepmode="backward"),
             dict(step="all")])))
-fig.update_yaxes(ticksuffix="%") # reference : https://plotly.com/python/axes/
+fig.update_yaxes(ticksuffix="%") #reference : https://plotly.com/python/axes/
 fig.update_layout(xaxis_title='Date',yaxis_title='Value %')
 
 plotly.offline.plot(fig)
-
 
 # Data Visualization 2 REFERENCE: https://plotly.com/python/line-charts/
 
@@ -176,6 +174,7 @@ fig2.add_trace(go.Scatter(x=all_date2, y=values2, name='state', line = dict(colo
 fig2.add_trace(go.Scatter(x=all_us_date2, y=values_us2, name='national', line = dict(color='royalblue', width=4, dash='dash')))
 
 # Edit the layout
+
 fig2.update_yaxes(ticksuffix="%")
 fig2.update_layout(title='Unemployment Rates for Selected State & National', xaxis_title='Date', yaxis_title='Value %')
 plotly.offline.plot(fig2)
