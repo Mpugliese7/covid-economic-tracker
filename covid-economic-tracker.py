@@ -1,6 +1,5 @@
 # covid-19 economic tracker
 
-import csv
 import requests
 import json
 import os
@@ -81,7 +80,7 @@ UR_difference = round(last_value - last_value_us, 1)
 # Information Output
 
 print("----------------------------------------------------------------------")
-print(f"The {str.upper(state)} Labor Market During COVID-19 Pandemic")
+print(f"The {str.upper(state)} Labor Market During the COVID-19 Pandemic")
 print("----------------------------------------------------------------------")
 print(f"Current Unemployment Rate: {str(last_value)}%")
 print(f"February 2020 Unemployment Rate {str(pre_covid_level)}%")
@@ -116,7 +115,7 @@ for r in parsed_response["observations"]:
 dates = all_date 
 
 
-fig = px.line(x=dates, y=values, title='State Unemployment Rate Time Series')
+fig = px.line(x=dates, y=values, title=str.upper(state) + " State Unemployment Rate")
 fig.update_xaxes(
     rangeslider_visible=True,
     rangeselector=dict(
@@ -173,8 +172,18 @@ fig2 = go.Figure()
 fig2.add_trace(go.Scatter(x=all_date2, y=values2, name='state', line = dict(color='firebrick', width=4)))
 fig2.add_trace(go.Scatter(x=all_us_date2, y=values_us2, name='national', line = dict(color='royalblue', width=4, dash='dash')))
 
+fig2.update_xaxes(
+    rangeslider_visible=True,
+    rangeselector=dict(
+        buttons=list([
+            dict(count=1, label="1m", step="month", stepmode="backward"),
+            dict(count=6, label="6m", step="month", stepmode="backward"),
+            dict(count=1, label="YTD", step="year", stepmode="todate"),
+            dict(count=1, label="1y", step="year", stepmode="backward"),
+            dict(step="all")])))
+
 # Edit the layout
 
 fig2.update_yaxes(ticksuffix="%")
-fig2.update_layout(title='Unemployment Rates for Selected State & United States', xaxis_title='Date', yaxis_title='Value, %')
+fig2.update_layout(title="The National & " + str.upper(state) + " Unemployment Rates", xaxis_title='Date', yaxis_title='Value, %')
 fig2.show()
