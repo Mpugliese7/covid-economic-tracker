@@ -127,9 +127,9 @@ fig.update_xaxes(
             dict(count=1, label="1y", step="year", stepmode="backward"),
             dict(step="all")])))
 fig.update_yaxes(ticksuffix="%") #reference : https://plotly.com/python/axes/
-fig.update_layout(xaxis_title='Date',yaxis_title='Value %')
+fig.update_layout(xaxis_title='Date',yaxis_title='Value, %')
 
-plotly.offline.plot(fig)
+fig.show()
 
 # Data Visualization 2 REFERENCE: https://plotly.com/python/line-charts/
 
@@ -143,7 +143,7 @@ values2 = all_val2
 
 all_val_us2 = []
 b = -1
-for x in parsed_response["observations"]:
+for x in parsed_response_us["observations"]:
     b += 1
     valuec_us2 = float(parsed_response_us["observations"][b]["value"])
     all_val_us2.append(valuec_us2)
@@ -176,5 +176,5 @@ fig2.add_trace(go.Scatter(x=all_us_date2, y=values_us2, name='national', line = 
 # Edit the layout
 
 fig2.update_yaxes(ticksuffix="%")
-fig2.update_layout(title='Unemployment Rates for Selected State & National', xaxis_title='Date', yaxis_title='Value %')
-plotly.offline.plot(fig2)
+fig2.update_layout(title='Unemployment Rates for Selected State & United States', xaxis_title='Date', yaxis_title='Value, %')
+fig2.show()
