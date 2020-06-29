@@ -13,8 +13,8 @@ Issue requests to the [St. Louis Federal Reserve's FRED API](https://fred.stloui
 Download this repository (https://github.com/Mpugliese7/covid-economic-tracker) onto your computer. Then navigate there from the command line. 
 
 Create and activate a new Anaconda virtual environment named something like "covid-tracker-env". 
-    conda create covid-tracker-env
-    conda activate covid-tracker-env
+    ```conda create covid-tracker-env
+    conda activate covid-tracker-env```
 
 Pip install the required packages specificed in the "requirements.txt" file that was downloaded from the repository.
     pip install -r requirements.txt
