@@ -12,42 +12,30 @@ Issue requests to the [St. Louis Federal Reserve's FRED API](https://fred.stloui
 # Installation and Setup
 Download this repository (https://github.com/Mpugliese7/covid-economic-tracker) onto your computer. Then navigate there from the command line:
 
-    '''
     cd ~/Desktop/Python_Class/covid-economic-tracker
-    '''
 
 Create and activate a new Anaconda virtual environment named something like "covid-tracker-env":
     
-    ```
     conda create covid-tracker-env
     conda activate covid-tracker-env
-    ```
 
 Pip install the required packages specificed in the "requirements.txt" file that was downloaded from the repository:
     
-    '''
     pip install -r requirements.txt
-    '''
 
 Create a .env file and place your unique API key in the .env:
     
-    '''
     FRED_API_Key=123456789
-    '''
 
 Make sure there is a corresponding .gitignore file that prevents the .env file from being uploaded to github:
     
-    '''
     # ignore secret environment variable values
     .env
-    '''
 
 # Running the program
 To run the program:
     
-    '''
     python covid-economic-tracker.py
-    '''
 
 When prompted, enter a state abbreivation (two A-Z characters). If the entered abbreviation does not meet those criteria, the program will not run and will print an error message. The user can try again after a failed attempt.
 
